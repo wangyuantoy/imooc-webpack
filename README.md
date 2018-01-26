@@ -25,33 +25,33 @@ Just webpack demo
     * 3.5 提取公共代码
     * 3.5 代码分割 和 懒加载
     * 3.6 打包 CSS (style-loader)
-    * 3.7 处理 CSS (css-loader)
+    * 3.7 处理 CSS (css-loader)
     * 3.8 配置 CSS 预处理器 (less-loader)
     * 3.9 提取 CSS 到单独文件
     * 3.10 posscss
     * 3.11 JS Tree-shaking
     * 3.12 CSS Tree-shaking
     * 3.13 图片处理
-    * 3.14 自动合成sprite
+    * 3.14 自动合成sprite
     * 3.15 处理字体文件
-    * 3.16 处理第三方 JS 库
+    * 3.16 处理第三方 JS 库
     * 3.17 处理 HTML 
 
 * 第四章 Webpack 环境配置
     * 4.1 Webpack Watch mode
     * 4.2 Webpack-dev-server historyApiFallback
     * 4.3 Webpack-dev-server 接口代理 proxy
-    * 4.4 Hot Moduel Reloading
+    * 4.4 Hot Moduel Reloading
     * 4.5 区分开发环境 和 生产环境
     * 4.6 使用 middle 来搭建开发环境
 
 * 第五章 Webpack 实战场景
-    * 5.1 分析打包结果
+    * 5.1 分析打包结果
     * 5.2 优化打包速度
     * 5.3 长缓存优化
     * 5.4 多页面应用
 
-* 第六章 Webpack 和 Vue
+* 第六章 Webpack 和 Vue
     * 6.1 vue-cli 介绍
     * 6.2 vue-cli webpack template
     * 6.3 vue-cli webpack 开发配置
@@ -69,5 +69,5 @@ Just webpack demo
 
 * 第九章 课程总结
     * 9.1 Webpack 面试常见问题
-    * 9.2 课程回顾以及结语
+    * 9.2 课程回顾以及结语
 
