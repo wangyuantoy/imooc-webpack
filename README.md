@@ -52,22 +52,22 @@ Just webpack demo
     * 5.4 多页面应用
 
 * 第六章 Webpack 和 Vue
-    * vue-cli 介绍
-    * vue-cli webpack template
-    * vue-cli webpack 开发配置
-    * 使用 vue-cli 生成项目实现 todolist
+    * 6.1 vue-cli 介绍
+    * 6.2 vue-cli webpack template
+    * 6.3 vue-cli webpack 开发配置
+    * 6.4 使用 vue-cli 生成项目实现 todolist
 
 * 第七章 Webpack 和 React
-    * create-react-app 介绍
-    * create-react-app 运行脚本
-    * create-react-app 相关配置
-    * create-react-app 自定义配置 和 模块热更新
+    * 7.1 create-react-app 介绍
+    * 7.2 create-react-app 运行脚本
+    * 7.3 create-react-app 相关配置
+    * 7.4 create-react-app 自定义配置 和 模块热更新
 
 * 第八章 Webpack 和 Angular
-    * Angular-cli 介绍
-    * Angular-cli 的配置和模块热更新
+    * 8.1 Angular-cli 介绍
+    * 8.2 Angular-cli 的配置和模块热更新
 
 * 第九章 课程总结
-    * Webpack 面试常见问题
-    * 课程回顾以及结语
+    * 9.1 Webpack 面试常见问题
+    * 9.2 课程回顾以及结语
 
