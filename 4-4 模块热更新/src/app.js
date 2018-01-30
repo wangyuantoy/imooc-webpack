@@ -20,7 +20,7 @@ $.get('/comments/show', {
 $.get('/msg/index', {
     format: 'cards'
 }, function (data) {
-    console.log(data, 1)
+    console.log(data, 2)
 })
 
 if (module.hot) {
