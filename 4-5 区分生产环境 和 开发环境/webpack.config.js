@@ -172,13 +172,6 @@ module.exports = {
     plugins: [
         extractLess,
 
-        new PurifyWebpack({
-            paths: glob.sync([
-                './*.html',
-                './src/*.js'
-            ])
-        }),
-
         new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest'
         }),
@@ -194,8 +187,6 @@ module.exports = {
                 collapseWhitespace: true
             }
         }),
-
-        // new webpack.optimize.UglifyJsPlugin(),
 
         new CleanWebpackPlugin(['dist']),
 

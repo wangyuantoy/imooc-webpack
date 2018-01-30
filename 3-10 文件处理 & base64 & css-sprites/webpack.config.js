@@ -1,15 +1,12 @@
 var webpack = require('webpack')
 var PurifyWebpack = require('purifycss-webpack')
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlInlinkChunkPlugin = require('html-webpack-inline-chunk-plugin')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 var path = require('path')
 var glob = require('glob-all')
 
 var extractLess = new ExtractTextWebpackPlugin({
-    filename: 'css/[name]-bundle-[hash:5].css',
+    filename: 'css/[name].bundle.css',
 })
 
 module.exports = {
@@ -19,26 +16,13 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
-        filename: 'js/[name]-bundle-[hash:5].js'
-    },
-
-    devServer: {
-        port: 9001,
-        historyApiFallback: {
-            rewrites: [
-                {
-                    from: /^\/([a-zA-Z0-9]+\/?)([a-zA-Z0-9]+)/,
-                    to: function (context) {
-                        return '/' + context.match[1] + context.match[2] + '.html'
-                    }
-                }
-            ]
-        }
+        publicPath: 'dist/',
+        filename: '[name].bundle.js'
     },
 
     resolve: {
         alias: {
+            // jquery 别名，告诉webpack jquery = src/libs/jquery.min.js
             jquery$: path.resolve(__dirname, 'src/libs/jquery.min.js')
         }
     },
@@ -46,26 +30,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test:/\.js$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['env']
-                        }
-                    }
-                ]
-            },
-
-            {
                 test: /\.less$/,
                 use: extractLess.extract(
                     {
                         fallback: {
                             loader: 'style-loader',
                             options: {
-                                singleton: true,
-                                // transform: './css.transform.js'
+                                singleton: true
                             }
                         },
                         use: [
@@ -73,21 +44,18 @@ module.exports = {
                                 loader: 'css-loader',
                                 options: {
                                     importLoaders: 2
-                                    // minimize: true,
-                                    // modules: true,
-                                    // localIdentName: '[path][name]_[local]_[hash:base64:5]'
                                 }
-                                // loader: 'file-loader'
                             },
                             {
                                 loader: 'postcss-loader',
                                 options: {
                                     ident: 'postcss',
                                     plugins: [
+                                        // CSS 雪碧图
                                         require('postcss-sprites')({
                                             spritePath: 'dist/assets/imgs/sprites',
                                             retina: true
-                                        }),      
+                                        }),
                                         require('postcss-cssnext')()
                                     ]
                                 }
@@ -102,20 +70,14 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpeg|gif)$/,
                 use: [
-                    // {
-                    //     loader: 'file-loader',
-                    //     options: {
-                    //         publicPath: '',
-                    //         outputPath: 'dist/',
-                    //         useRelativePath: true
-                    //     }
-                    // }
                     {
                         loader: 'url-loader',
                         options: {
                             name: '[name]-[hash:5].[ext]',
                             limit: 1000,
-                            outputPath: 'assets/imgs/'
+                            publicPath: '',
+                            outputPath: 'dist/',
+                            useRelativePath: true
                         }
                     },
                     {
@@ -136,6 +98,7 @@ module.exports = {
                         loader: 'url-loader',
                         options: {
                             name: '[name]-[hash:5].[ext]',
+                            // 转为 baseurl 的前提
                             limit: 5000,
                             publicPath: '',
                             outputPath: 'dist/',
@@ -148,57 +111,30 @@ module.exports = {
             {
                 test: path.resolve(__dirname, 'src/app.js'),
                 use: [
-                    {
+                    {   
+                        // 使用 imports-loader 注入
                         loader: 'imports-loader',
                         options: {
                             $: 'jquery'
                         }
                     }
                 ]
-            },
-
-            // {
-            //     test: /\.html$/,
-            //     use: [
-            //         {
-            //             loader: 'html-loader',
-            //             options: {
-            //                 attrs: ['img:src', 'img:data-src']
-            //             }
-            //         }
-            //     ]
-            // }
+            }
         ]
     },
 
     plugins: [
         extractLess,
-
         new PurifyWebpack({
             paths: glob.sync([
                 './*.html',
                 './src/*.js'
             ])
         }),
-
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        }),
-
-        new HtmlInlinkChunkPlugin({
-            inlineChunks: ['manifest']
-        }),
-
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: './index.html',
-            minify: {
-                collapseWhitespace: true
-            }
-        }),
-
-        new webpack.optimize.UglifyJsPlugin(),
-
-        new CleanWebpackPlugin(['dist'])
+        // 或是提供一个变量
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery'
+        // }),
+        new webpack.optimize.UglifyJsPlugin()
     ]
 }

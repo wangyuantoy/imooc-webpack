@@ -1,12 +1,15 @@
 var webpack = require('webpack')
 var PurifyWebpack = require('purifycss-webpack')
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlInlinkChunkPlugin = require('html-webpack-inline-chunk-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 var path = require('path')
 var glob = require('glob-all')
 
 var extractLess = new ExtractTextWebpackPlugin({
-    filename: 'css/[name].bundle.css',
+    filename: 'css/[name]-bundle-[hash:5].css',
 })
 
 module.exports = {
@@ -16,8 +19,25 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'dist/',
-        filename: '[name].bundle.js'
+        publicPath: '/',
+        filename: 'js/[name]-bundle-[hash:5].js'
+    },
+
+    devServer: {
+        port: 9001,
+        // HTML5 histroy API rewrite
+        historyApiFallback: {
+            rewrites: [
+                {   
+                    // 什么样的路径
+                    from: /^\/([a-zA-Z0-9]+\/?)([a-zA-Z0-9]+)/,
+                    // 转去哪里
+                    to: function (context) {
+                        return '/' + context.match[1] + context.match[2] + '.html'
+                    }
+                }
+            ]
+        }
     },
 
     resolve: {
@@ -28,6 +48,18 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test:/\.js$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['env']
+                        }
+                    }
+                ]
+            },
+
             {
                 test: /\.less$/,
                 use: extractLess.extract(
@@ -86,9 +118,7 @@ module.exports = {
                         options: {
                             name: '[name]-[hash:5].[ext]',
                             limit: 1000,
-                            publicPath: '',
-                            outputPath: 'dist/',
-                            useRelativePath: true
+                            outputPath: 'assets/imgs/'
                         }
                     },
                     {
@@ -128,21 +158,41 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+
+            // {
+            //     test: /\.html$/,
+            //     use: [
+            //         {
+            //             loader: 'html-loader',
+            //             options: {
+            //                 attrs: ['img:src', 'img:data-src']
+            //             }
+            //         }
+            //     ]
+            // }
         ]
     },
 
     plugins: [
         extractLess,
-        new PurifyWebpack({
-            paths: glob.sync([
-                './*.html',
-                './src/*.js'
-            ])
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest'
         }),
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery'
-        // }),
-        new webpack.optimize.UglifyJsPlugin()
+
+        new HtmlInlinkChunkPlugin({
+            inlineChunks: ['manifest']
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './index.html',
+            minify: {
+                collapseWhitespace: true
+            }
+        }),
+
+        new CleanWebpackPlugin(['dist'])
     ]
 }
