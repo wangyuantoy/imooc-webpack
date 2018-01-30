@@ -44,6 +44,7 @@ module.exports = {
             allChunks: false
         }),
 
+        // CSS Tree shaking
         new PurifyCSS({
             paths: glob.sync([
                 path.join(__dirname, './*.html'),
@@ -51,6 +52,7 @@ module.exports = {
             ])
         }),
 
+        // JS Tree shaking
         new Webpack.optimize.UglifyJsPlugin()
     ]
 }

@@ -1,8 +1,5 @@
 # imooc-webpack
-
-This is video lesson for imooc students
-Just webpack demo
-
+This is example code for imooc students
 # Lesson-name: Webpack 3 前端工程化(Webpack 3 front-end work flow)
 # Lesson-url: https://coding.imooc.com/class/171.html
 # content
@@ -11,31 +8,31 @@ Just webpack demo
     * 1.1 前端开发历史发展
     * 1.2 导学
 
-* 第二章 学习准备
+* 第二章 Webpack 学习准备
     * 2.1 模块化思想
     * 2.2 开发环境准备
     * 2.3 webpack 简介
     * 2.4 webpack 核心概念
 
-* 第三章 由浅入深Webpack
+* 第三章 由浅入深 Webpack
     * 3.1 使用 webpack （webpack-cli）
     * 3.2 打包 JS (三种不同模块化规范的js在webpack 中的打包)
     * 3.3 编译 ES6(babel 和 runtime)
     * 3.4 编译 Typescript
     * 3.5 提取公共代码
-    * 3.5 代码分割 和 懒加载
-    * 3.6 打包 CSS (style-loader)
-    * 3.7 处理 CSS (css-loader)
-    * 3.8 配置 CSS 预处理器 (less-loader)
-    * 3.9 提取 CSS 到单独文件
-    * 3.10 posscss
-    * 3.11 JS Tree-shaking
-    * 3.12 CSS Tree-shaking
-    * 3.13 图片处理
-    * 3.14 自动合成sprite
-    * 3.15 处理字体文件
-    * 3.16 处理第三方 JS 库
-    * 3.17 处理 HTML 
+    * 3.6 代码分割 和 懒加载
+    * 3.7 打包 CSS (style-loader)
+    * 3.8 处理 CSS (css-loader)
+    * 3.9 配置 CSS 预处理器 (less-loader)
+    * 3.10 提取 CSS 到单独文件
+    * 3.11 posscss
+    * 3.12 JS Tree-shaking
+    * 3.13 CSS Tree-shaking
+    * 3.14 图片处理
+    * 3.15 自动合成sprite
+    * 3.16 处理字体文件
+    * 3.17 处理第三方 JS 库
+    * 3.18 处理 HTML 
 
 * 第四章 Webpack 环境配置
     * 4.1 Webpack Watch mode

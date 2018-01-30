@@ -1,3 +1,4 @@
+// css-loader
 module.exports = {
     module: {
         rules: [
@@ -14,6 +15,7 @@ module.exports = {
     entry: 'index.js'
 }
 
+// 数组写法
 module.exports = {
     entry: ['index.js', 'vendor.js']
 }

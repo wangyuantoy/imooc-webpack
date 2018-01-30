@@ -29,18 +29,18 @@ module.exports = {
                         {
                             loader: 'css-loader',
                             options: {
-                                // minimize: true,
                                 modules: true,
                                 localIdentName: '[path][name]_[local]_[hash:base64:5]'
                             }
-                            // loader: 'file-loader'
                         },
                         {
                             loader: 'postcss-loader',
                             options: {
                                 ident: 'postcss',
                                 plugins: [
-                                    // require('autoprefixer')(),
+                                    // 自动加浏览器前缀
+                                    require('autoprefixer')(),
+                                    // 使用未来的css
                                     require('postcss-cssnext')()
                                 ]
                             }
@@ -50,12 +50,7 @@ module.exports = {
                         }
                     ]
                 })
-            },
-
-            // {
-            //     test: /\.js$/,
-            //     use: 'babel-loader'
-            // }
+            }
         ]
     },
 
